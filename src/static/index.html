@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fulltkt - Your Complete Train Booking Solution</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-train"></i>
+                    <span class="brand-text">fulltkt</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <div class="language-selector">
+                        <select id="languageSelect">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text" data-translate="title">Your Complete</span><br>
+                    Train Booking Solution
+                </h1>
+                <p class="hero-subtitle" data-translate="subtitle">
+                    Check train availability, PNR status, live running status, and more - all in one place
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('services')">
+                        <i class="fas fa-search"></i>
+                        <span data-translate="startSearching">Start Searching</span>
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        <span data-translate="watchDemo">Watch Demo</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <i class="fas fa-train"></i>
+                    <span>Live Tracking</span>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>PNR Status</span>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Seat Availability</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title" data-translate="ourServices">Our Services</h2>
+            <div class="services-grid">
+                <!-- Train Search -->
+                <div class="service-card" id="trainSearchCard">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 data-translate="trainSearch">Train Search</h3>
+                    <p data-translate="trainSearchDesc">Find trains between stations with real-time availability</p>
+                    <button class="service-btn" onclick="showService('trainSearch')">
+                        <span data-translate="searchTrains">Search Trains</span>
+                    </button>
+                </div>
+
+                <!-- PNR Status -->
+                <div class="service-card" id="pnrStatusCard">
+                    <div class="service-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3 data-translate="pnrStatus">PNR Status</h3>
+                    <p data-translate="pnrStatusDesc">Check your ticket confirmation status instantly</p>
+                    <button class="service-btn" onclick="showService('pnrStatus')">
+                        <span data-translate="checkPNR">Check PNR</span>
+                    </button>
+                </div>
+
+                <!-- Live Status -->
+                <div class="service-card" id="liveStatusCard">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 data-translate="liveStatus">Live Train Status</h3>
+                    <p data-translate="liveStatusDesc">Track your train's current location and delays</p>
+                    <button class="service-btn" onclick="showService('liveStatus')">
+                        <span data-translate="trackTrain">Track Train</span>
+                    </button>
+                </div>
+
+                <!-- Seat Availability -->
+                <div class="service-card" id="seatAvailabilityCard">
+                    <div class="service-icon">
+                        <i class="fas fa-chair"></i>
+                    </div>
+                    <h3 data-translate="seatAvailability">Seat Availability</h3>
+                    <p data-translate="seatAvailabilityDesc">Check available seats for your journey</p>
+                    <button class="service-btn" onclick="showService('seatAvailability')">
+                        <span data-translate="checkSeats">Check Seats</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Forms Section -->
+    <section id="serviceforms" class="service-forms">
+        <div class="container">
+            <!-- Train Search Form -->
+            <div id="trainSearch" class="service-form active">
+                <h3><i class="fas fa-search"></i> Search Trains</h3>
+                <form class="form-grid">
+                    <div class="form-group">
+                        <label for="trainNumber">Train Number or Name</label>
+                        <input type="text" id="trainNumber" placeholder="e.g., 12051 or Shatabdi">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="searchTrain()">
+                            <i class="fas fa-search"></i>
+                            Search Train
+                        </button>
+                    </div>
+                </form>
+                <div id="trainSearchResults" class="results-container"></div>
+            </div>
+
+            <!-- PNR Status Form -->
+            <div id="pnrStatus" class="service-form">
+                <h3><i class="fas fa-ticket-alt"></i> Check PNR Status</h3>
+                <form class="form-grid">
+                    <div class="form-group">
+                        <label for="pnrNumber">PNR Number</label>
+                        <input type="text" id="pnrNumber" placeholder="Enter 10-digit PNR number" maxlength="10">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="checkPNR()">
+                            <i class="fas fa-check"></i>
+                            Check Status
+                        </button>
+                    </div>
+                </form>
+                <div id="pnrResults" class="results-container"></div>
+            </div>
+
+            <!-- Live Status Form -->
+            <div id="liveStatus" class="service-form">
+                <h3><i class="fas fa-map-marker-alt"></i> Live Train Status</h3>
+                <form class="form-grid">
+                    <div class="form-group">
+                        <label for="liveTrainNumber">Train Number</label>
+                        <input type="text" id="liveTrainNumber" placeholder="e.g., 12051">
+                    </div>
+                    <div class="form-group">
+                        <label for="departureDate">Departure Date</label>
+                        <input type="date" id="departureDate">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="checkLiveStatus()">
+                            <i class="fas fa-location-arrow"></i>
+                            Track Train
+                        </button>
+                    </div>
+                </form>
+                <div id="liveStatusResults" class="results-container"></div>
+            </div>
+
+            <!-- Seat Availability Form -->
+            <div id="seatAvailability" class="service-form">
+                <h3><i class="fas fa-chair"></i> Check Seat Availability</h3>
+                <form class="form-grid">
+                    <div class="form-group">
+                        <label for="seatTrainNumber">Train Number</label>
+                        <input type="text" id="seatTrainNumber" placeholder="e.g., 12051">
+                    </div>
+                    <div class="form-group">
+                        <label for="fromStation">From Station</label>
+                        <input type="text" id="fromStation" placeholder="e.g., NDLS">
+                    </div>
+                    <div class="form-group">
+                        <label for="toStation">To Station</label>
+                        <input type="text" id="toStation" placeholder="e.g., BCT">
+                    </div>
+                    <div class="form-group">
+                        <label for="journeyDate">Journey Date</label>
+                        <input type="date" id="journeyDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="classCode">Class</label>
+                        <select id="classCode">
+                            <option value="SL">Sleeper (SL)</option>
+                            <option value="3A">3rd AC (3A)</option>
+                            <option value="2A">2nd AC (2A)</option>
+                            <option value="1A">1st AC (1A)</option>
+                            <option value="CC">Chair Car (CC)</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="checkSeatAvailability()">
+                            <i class="fas fa-search"></i>
+                            Check Availability
+                        </button>
+                    </div>
+                </form>
+                <div id="seatAvailabilityResults" class="results-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title" data-translate="whyChoose">Why Choose fulltkt?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 data-translate="lightningFast">Lightning Fast</h3>
+                    <p data-translate="lightningFastDesc">Get instant results with our optimized search algorithms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 data-translate="secureReliable">Secure & Reliable</h3>
+                    <p data-translate="secureReliableDesc">Your data is safe with our enterprise-grade security</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 data-translate="mobileFriendly">Mobile Friendly</h3>
+                    <p data-translate="mobileFriendlyDesc">Access all features seamlessly on any device</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 data-translate="multiLanguage">Multi-Language</h3>
+                    <p data-translate="multiLanguageDesc">Available in multiple Indian languages</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-brand">
+                        <i class="fas fa-train"></i>
+                        <span class="brand-text">fulltkt</span>
+                    </div>
+                    <p>Your complete train booking solution</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <a href="#services">Train Search</a>
+                        <a href="#services">PNR Status</a>
+                        <a href="#services">Live Status</a>
+                        <a href="#services">Seat Availability</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <a href="#">Help Center</a>
+                        <a href="#">Contact Us</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 fulltkt. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
