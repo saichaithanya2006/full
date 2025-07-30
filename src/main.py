@@ -8,6 +8,15 @@ from flask_cors import CORS
 from src.models.user import db
 from src.routes.user import user_bp
 from src.routes.train import train_bp
+from fastapi import FastAPI
+
+app = FastAPI()
+
+# Example route
+@app.get("/")
+def root():
+    return {"status": "Backend is live!"}
+
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
